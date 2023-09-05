@@ -10,7 +10,7 @@ logoutBtn.addEventListener('click', () => {
   sessionStorage.setItem('email', null);
   sessionStorage.setItem('roles', null);
 
-  window.location.href = 'login.html';
+  window.location.href = 'index.html';
 });
 
 document.addEventListener('DOMContentLoaded', () => {

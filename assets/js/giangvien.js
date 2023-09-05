@@ -2,7 +2,7 @@ const token = sessionStorage.getItem("token");
 const email = sessionStorage.getItem("email");
 console.log(token);
 if (token == null) {
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 }
 const navLinks = document.querySelectorAll('.nav-link');
 const contentDiv = document.getElementById('content');
@@ -175,7 +175,7 @@ logoutBtn.addEventListener('click', () => {
     sessionStorage.setItem('roles', null);
 
     // Điều hướng đến trang đăng nhập
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
 });
 const emailElement = document.getElementById('user-name');
 emailElement.innerText = email;

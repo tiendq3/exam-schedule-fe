@@ -3,7 +3,7 @@ const email = sessionStorage.getItem("email");
 console.log(email);
 console.log(token);
 if (token == null) {
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 }
 document.addEventListener("DOMContentLoaded", function () {
     fetch("https://exam-schedule-production.up.railway.app/sinhvien/ds-lophoc", {
@@ -84,7 +84,7 @@ logoutBtn.addEventListener('click', () => {
     sessionStorage.setItem('roles', null);
 
     // Điều hướng đến trang đăng nhập
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
 });
 const emailElement = document.getElementById('user-name');
 emailElement.innerText =email;
