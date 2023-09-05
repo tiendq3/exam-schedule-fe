@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Trang Đăng Nhập</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/hust-logo.jpeg">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            width: 100%;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .image-container {
+            flex-basis: 70%;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .form-container {
+            flex-basis: 25%;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 90%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 8px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="assets/images/hust.jpg" alt="Logo">
+        </div>
+        <div class="form-container">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Tên đăng nhập:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mật khẩu:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Đăng nhập</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Ngăn chặn gửi form một cách tự động
+
+        // Lấy giá trị email và mật khẩu từ form
+        var email = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        // Tạo một đối tượng chứa dữ liệu gửi đi
+        var data = {
+            email: email,
+            password: password
+        };
+
+        // Gửi yêu cầu POST đến API
+        fetch("https://exam-schedule-production.up.railway.app/api/v1/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(responseData => {
+                console.log(responseData);
+
+                sessionStorage.setItem('token', responseData.jwt);
+                sessionStorage.setItem('roles', responseData.roles);
+                sessionStorage.setItem('email', responseData.email);
+
+                const roles = Array.from(responseData.roles);
+                if (roles.includes("ROLE_SINH_VIEN"))
+                    window.location.href = "sinhvien.html";
+                else if (roles.includes("ROLE_GIANG_VIEN"))
+                    window.location.href = "giangvien.html";
+                else if (roles.includes("ROLE_GIAO_VU"))
+                 window.location.href = "giaovu.html";
+            })
+            .catch(error => {
+                console.error("Lỗi khi gửi yêu cầu:", error);
+            });
+    });
+</script>
+
+</html>

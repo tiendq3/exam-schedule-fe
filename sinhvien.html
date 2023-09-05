@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin lớp học</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/hust-logo.jpeg">
+    <link rel="stylesheet" href="assets/css/sinhvien.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="assets/images/hust-logo.jpeg" alt="Logo" class="logo-image">
+            <h1 class="logo-title">Hệ thống quản trị đại học trực tuyến</h1>
+        </div>
+        <div class="user">
+            <img src="assets/images/icon-user.jpg" alt="Tài khoản" class="user-icon">
+            <div class="dropdown-content">
+                <a href="#">Xem thông tin cá nhân</a>
+                <a id="logOut" href="#">Đăng xuất</a>
+            </div>
+            <span id="user-name"></span>
+        </div>
+    </header>
+    <div class="content">
+        <h1>Thông tin lớp học của sinh viên</h1>
+        <table id="classTable">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã Lớp Học</th>
+                    <th>Học Phần</th>
+                    <th>Giảng viên</th>
+                    <th>Lịch thi</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Thông tin lớp thi</h2>
+            <table id="scheduleTable">
+                <thead>
+                    <tr>
+                        <th>Mã lớp thi</th>
+                        <th>Tên học phần</th>
+                        <th>Ngày thi</th>
+                        <th>Kíp thi</th>
+                        <th>Phòng thi</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script src="assets/js/sinhvien.js"></script>
+
+</html>

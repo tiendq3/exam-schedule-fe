@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản trị đại học trực tuyến</title>
+  <link rel="icon" type="image/x-icon" href="assets/images/hust-logo.jpeg">
+  <link rel="stylesheet" href="assets/css/giaovu.css">
+</head>
+
+<body>
+  <header class="header">
+    <div class="logo">
+      <img src="assets/images/hust-logo.jpeg" alt="Logo" class="logo-image">
+      <h1 class="logo-title">Hệ thống quản trị đại học trực tuyến</h1>
+    </div>
+    <div class="user">
+      <img src="assets/images/icon-user.jpg" alt="Tài khoản" class="user-icon" style="margin-right: 15px;">
+      <div class="dropdown-content">
+        <a href="#">Xem thông tin cá nhân</a>
+        <a id="logOut" href="#">Đăng xuất</a>
+      </div>
+      <span id="user-name">giaovu@hust.edu.vn</span>
+    </div>
+  </header>
+  <header>
+    <h1>Trang Giáo Vụ</h1>
+    <nav>
+      <ul>
+        <li class="active" onclick="showTab('import-export')">Nhập và xuất file</li>
+        <li onclick="showTab('schedule')">Quản lý lịch thi</li>
+        <li onclick="showTab('students')">Sinh Viên</li>
+        <li onclick="showTab('lecturers')">Giảng Viên</li>
+        <li onclick="showTab('exam-room')">Phòng thi</li>
+        <li onclick="showTab('exam-team')">Kíp thi</li>
+        <li onclick="showTab('term')">Học phần</li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <!-- tab1 -->
+    <section id="import-export">
+      <div class="import-export-content" style="display: flex;">
+        <div class="import-data" style="width: 40%;">
+          <h2 style="margin: 0; text-align: center;">Import Data</h2>
+          <label for="">Tải xuống:</label>
+          <button class="form-input" style="margin:0 10px 0 0;">Form Input</button>
+
+          <input type="file" id="excelFileInput" />
+          <button onclick="uploadInputFile()" id="uploadButton">Upload</button>
+
+        </div>
+
+        <div class="vertical-line" style="border-right: 1px solid #ccc;height: 80px; margin: 0px; padding: 0px;"></div>
+
+        <div class="export-data">
+          <h2 style="margin: 0; text-align: center;">Export Data</h2>
+          <label for="startDate" style="margin-left: 10px;">Start Date:</label>
+          <input type="date" id="startDate">
+          <label for="endDate">End Date:</label>
+          <input type="date" id="endDate">
+
+          <!-- Chọn file dữ liệu cần xuất -->
+          <label for="exportFile">Select data to export:</label>
+          <select id="exportFile">
+            <option value="1">-- Select data --</option>
+            <option value="2">Danh sách dự thi</option>
+            <option value="3">Danh sách lớp thi</option>
+            <option value="4">Danh sách phòng thi</option>
+            <option value="5">Thống kê</option>
+            <option value="6">Xuất PDT</option>
+          </select>
+          <button id="exportBtn" onclick="exportData()">Export</button>
+        </div>
+      </div>
+
+      <hr>
+      <div id="filter-exams">
+        <label for="class-filter-schedule">Lọc theo lớp học:</label>
+        <select id="class-filter-schedule">
+          <option value="">Tất cả</option>
+        </select>
+
+        <label for="exam-class-filter">Lọc theo lớp thi:</label>
+        <select id="exam-class-filter">
+          <option value="">Tất cả</option>
+        </select>
+      </div>
+
+      <div id="exam-list"></div>
+      <div id="pagination-exam"></div>
+    </section>
+
+    <!-- tab2 -->
+    <section id="schedule" class="active-tab">
+      <div id="importSection">
+        <label for="">Phân công coi thi: </label>
+        <input type="file" id="coiThiInput" />
+        <button onclick="coiThiUpload()" id="uploadCoiThiButton">Upload</button>
+      </div>
+
+      <table id="lopThiTable">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Mã lớp thi</th>
+            <th>Mã lớp học</th>
+            <th>Phòng thi</th>
+            <th>Học phần</th>
+            <th>Số sinh viên</th>
+            <th>Giảng viên coi thi</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dữ liệu lớp thi từ API sẽ được thêm vào đây -->
+        </tbody>
+      </table>
+
+      <!-- Modal sửa lớp thi -->
+      <div id="updateModal" class="modal">
+        <div class="modal-content">
+          <!-- Nội dung modal sửa lớp thi -->
+        </div>
+      </div>
+
+      <input type="file" id="importFileInput" style="display: none;">
+    </section>
+
+    <!-- tab3 -->
+    <section id="students">
+      <div id="filter">
+        <label for="class-filter">Lọc theo lớp:</label>
+        <select id="class-filter" onchange="filterStudents()">
+          <option value="">Tất cả</option>
+          <!-- Dữ liệu lớp sẽ được cung cấp sau -->
+        </select>
+        <label for="department-filter">Lọc theo viện:</label>
+        <select id="department-filter" onchange="filterStudents()">
+          <option value="">Tất cả</option>
+          <!-- Dữ liệu viện sẽ được cung cấp sau -->
+        </select>
+      </div>
+      <div id="student-list"></div>
+      <div id="pagination-sinhvien"></div>
+    </section>
+
+    <!-- tab4 -->
+    <section id="lecturers">
+      <div id="lecturer-list"></div>
+      <div id="pagination-giangvien"></div>
+    </section>
+
+    <!-- tab5 -->
+    <section id="exam-room" class="active-tab">
+      <button id="addRoomBtn">Thêm phòng thi</button>
+      <button id="importBtn">Import phòng thi</button>
+
+      <table id="roomTable">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Tên phòng</th>
+            <th>Số lượng máy</th>
+            <th>Số máy sử dụng được</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dữ liệu phòng thi từ API sẽ được thêm vào đây -->
+        </tbody>
+      </table>
+
+      <!-- Modal thêm/sửa phòng thi -->
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <span class="closeBtn">&times;</span> <!-- Thêm nút đóng vào modal -->
+          <h2></h2>
+          <label>Tên phòng:</label>
+          <input type="text" id="tenPhong" required>
+          <label>Số lượng máy:</label>
+          <input type="number" id="soLuongMay" required>
+          <label>Số máy sử dụng được:</label>
+          <input type="number" id="soMaySuDungDuoc" required>
+          <button id="saveBtn">Lưu</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- tab5 -->
+    <section id="exam-team" class="active-tab">
+
+    </section>
+
+    <!-- tab5 -->
+    <section id="term" class="active-tab">
+
+    </section>
+
+  </main>
+</body>
+<script>
+
+</script>
+<script src="assets/js/giaovu.js"></script>
+
+</html>
