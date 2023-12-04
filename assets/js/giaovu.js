@@ -47,7 +47,7 @@ function showTab(tabId) {
 
 // giang vien
 async function fetchLecturers(pageNumber) {
-  const apiUrl = `https://exam-schedule-production.up.railway.app/giaovu/ds-giang-vien?page=${pageNumber}`;
+  const apiUrl = `https://ithust.id.vn/giaovu/ds-giang-vien?page=${pageNumber}`;
   const response = await fetch(apiUrl, { headers: header });
   const data = await response.json();
   console.log(data);
@@ -173,7 +173,7 @@ let exampleStudents = [];
 // Cập nhật hàm showStudents để hiển thị danh sách sinh viên theo trang
 async function showStudents(pageNumber = 0) {
   // Cập nhật API URL (thay đổi thành URL API thực tế)
-  const apiUrl = `https://exam-schedule-production.up.railway.app/giaovu/ds-sinh-vien?page=${pageNumber}`;
+  const apiUrl = `https://ithust.id.vn/giaovu/ds-sinh-vien?page=${pageNumber}`;
   const response = await fetch(apiUrl, { headers: header });
   const students = await response.json();
   console.log(students);
@@ -274,7 +274,7 @@ let exampleClasses = [];
 let exampleExamClasses = [];
 
 async function fetchClasses() {
-  const apiUrl = 'https://exam-schedule-production.up.railway.app/lophoc/all';
+  const apiUrl = 'https://ithust.id.vn/lophoc/all';
   const response = await fetch(apiUrl);
   const classes = await response.json();
   console.log(classes);
@@ -282,7 +282,7 @@ async function fetchClasses() {
 }
 
 async function fetchExamClasses() {
-  const apiUrl = 'http://localhost:8080/lopthi/all';
+  const apiUrl = 'https://ithust.id.vn/lopthi/all';
   const response = await fetch(apiUrl);
   const examClasses = await response.json();
   console.log(examClasses);
@@ -293,7 +293,7 @@ async function fetchExamClasses() {
 async function fetchExams(pageNumber = 0) {
   const classFilterValue = document.getElementById('class-filter-schedule').value;
   const examClassFilterValue = document.getElementById('exam-class-filter').value;
-  const apiUrl = `https://exam-schedule-production.up.railway.app/giaovu/quan-ly-lich-thi?page=${pageNumber}&filtersMaLH=${classFilterValue}&filtersMaLT=${examClassFilterValue}`;
+  const apiUrl = `https://ithust.id.vn/giaovu/quan-ly-lich-thi?page=${pageNumber}&filtersMaLH=${classFilterValue}&filtersMaLT=${examClassFilterValue}`;
   const response = await fetch(apiUrl, { headers: header });
   const exams = await response.json();
   exampleExams = exams.content; // Lưu dữ liệu để sử dụng trong lọc
@@ -442,7 +442,7 @@ function uploadInputFile() {
   formData.append('file', fileInput.files[0]);
 
   // Gọi API để tải lên file
-  fetch('https://exam-schedule-production.up.railway.app/management/importDB', {
+  fetch('https://ithust.id.vn/management/importDB', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`
@@ -470,7 +470,7 @@ function uploadInputFile() {
 const formInput = document.querySelector('.form-input');
 formInput.addEventListener('click', () => {
   // Gọi đến API khi người dùng ấn vào nút
-  fetch('https://exam-schedule-production.up.railway.app/management/export-input-form', {
+  fetch('https://ithust.id.vn/management/export-input-form', {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`
@@ -510,19 +510,19 @@ function exportData() {
 
   switch (selectedValue) {
     case '2':
-      callApiExportFile("https://exam-schedule-production.up.railway.app/management/rptDanhSachDuThi", 'rptDanhSachDuThi.docx', startTimeStamp, endTimeStamp);
+      callApiExportFile("https://ithust.id.vn/management/rptDanhSachDuThi", 'rptDanhSachDuThi.docx', startTimeStamp, endTimeStamp);
       break;
     case '3':
-      callApiExportFile("https://exam-schedule-production.up.railway.app/management/rptDanhSachLopThi", 'rptDanhSachLopThi.docx', startTimeStamp, endTimeStamp);
+      callApiExportFile("https://ithust.id.vn/management/rptDanhSachLopThi", 'rptDanhSachLopThi.docx', startTimeStamp, endTimeStamp);
       break;
     case '4':
-      callApiExportFile("https://exam-schedule-production.up.railway.app/management/rptDanhSachPhongThi", 'rptDanhSachPhongThi.docx', startTimeStamp, endTimeStamp);
+      callApiExportFile("https://ithust.id.vn/management/rptDanhSachPhongThi", 'rptDanhSachPhongThi.docx', startTimeStamp, endTimeStamp);
       break;
     case '5':
-      callApiExportFile("https://exam-schedule-production.up.railway.app/management/rptPhanCongTrongThi", 'rptPhanCongTrongThi.docx', startTimeStamp, endTimeStamp);
+      callApiExportFile("https://ithust.id.vn/management/rptPhanCongTrongThi", 'rptPhanCongTrongThi.docx', startTimeStamp, endTimeStamp);
       break;
     case '6':
-      callApiExportFile("https://exam-schedule-production.up.railway.app/management/qryExportToPDT", 'qryExportToPDT.xlsx', startTimeStamp, endTimeStamp);
+      callApiExportFile("https://ithust.id.vn/management/qryExportToPDT", 'qryExportToPDT.xlsx', startTimeStamp, endTimeStamp);
       break;
     default:
       // Xử lý một giá trị không hợp lệ (nếu có)
@@ -572,7 +572,7 @@ function callApiExportFile(url, nameFile, startTimeStamp, endTimeStamp) {
 
 
 // phongthi
-const API_URL = 'https://exam-schedule-production.up.railway.app/phongthi';
+const API_URL = 'https://ithust.id.vn/phongthi';
 const API_GET_ALL = `${API_URL}/all`;
 const API_DELETE = `${API_URL}/delete`;
 const API_UPDATE = `${API_URL}/update`;
@@ -777,7 +777,7 @@ document.addEventListener('DOMContentLoaded', getAndRenderRoomList);
 
 
 // quản lý lịch thi
-const API_PHAN_CONG_TRONG_THI = 'https://exam-schedule-production.up.railway.app/management/phan-cong-trong-thi';
+const API_PHAN_CONG_TRONG_THI = 'https://ithust.id.vn/management/phan-cong-trong-thi';
 
 function coiThiUpload() {
   const fileInput = document.getElementById('coiThiInput');

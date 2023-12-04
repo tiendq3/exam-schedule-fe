@@ -44,7 +44,7 @@ function showContent(target) {
 }
 
 function fetchLopDangDayData() {
-    fetch('https://exam-schedule-production.up.railway.app/giangvien/ds-lophoc', {
+    fetch('https://ithust.id.vn/giangvien/ds-lophoc', {
         headers: {
             "Authorization": `Bearer ${token}`
         }
@@ -84,7 +84,7 @@ function fetchLopDangDayData() {
                     console.log(maLopHoc);
 
                     // Tạo URL endpoint với các request param và token
-                    const endpoint = `https://exam-schedule-production.up.railway.app/giangvien/exportDSThiByLopHoc?maLH=${maLopHoc}`;
+                    const endpoint = `https://ithust.id.vn/giangvien/exportDSThiByLopHoc?maLH=${maLopHoc}`;
                     const headers = {
                         'Authorization': `Bearer ${token}`
                     };
@@ -128,7 +128,7 @@ function fetchLopDangDayData() {
 }
 
 function fetchLopCoiThiData() {
-    fetch('https://exam-schedule-production.up.railway.app/giangvien/ds-lop-coi-thi', {
+    fetch('https://ithust.id.vn/giangvien/ds-lop-coi-thi', {
         headers: {
             "Authorization": `Bearer ${token}`
         }

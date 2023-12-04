@@ -6,7 +6,7 @@ if (token == null) {
     window.location.href = "index.html";
 }
 document.addEventListener("DOMContentLoaded", function () {
-    fetch("https://exam-schedule-production.up.railway.app/sinhvien/ds-lophoc", {
+    fetch("https://ithust.id.vn/sinhvien/ds-lophoc", {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ function openModal(maLH) {
         scheduleTable.tBodies[0].removeChild(scheduleTable.tBodies[0].firstChild);
     }
 
-    fetch(`https://exam-schedule-production.up.railway.app/sinhvien/lop-thi-cua-lop-hoc?maLH=${maLH}`, {
+    fetch(`https://ithust.id.vn/sinhvien/lop-thi-cua-lop-hoc?maLH=${maLH}`, {
         headers: {
             "Authorization": `Bearer ${token}`
         }
